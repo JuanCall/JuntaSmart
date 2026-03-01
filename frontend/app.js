@@ -8,7 +8,7 @@ if ('serviceWorker' in navigator) {
             .catch(err => console.error('Error en Service Worker', err));
     });
 }
-const API_URL = 'http://127.0.0.1:8000'; // La ruta de tu backend
+const API_URL = 'https://juntasmart-api.onrender.com';
 
 document.addEventListener('DOMContentLoaded', () => {
     
