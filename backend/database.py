@@ -1,14 +1,10 @@
-# database.py
 from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker, declarative_base
+from sqlalchemy.orm import sessionmaker
+from sqlalchemy.ext.declarative import declarative_base
 
-# Esto creará un archivo llamado 'juntas_mama.db' en tu carpeta backend
-SQLALCHEMY_DATABASE_URL = "sqlite:///./juntas_mama.db"
+SQLALCHEMY_DATABASE_URL = "postgresql://neondb_owner:npg_6rYjdoPLFQi8@ep-misty-brook-ae4kf8bm-pooler.c-2.us-east-2.aws.neon.tech/neondb?sslmode=require&channel_binding=require"
 
-# connect_args={"check_same_thread": False} es necesario solo para SQLite en FastAPI
-engine = create_engine(
-    SQLALCHEMY_DATABASE_URL, connect_args={"check_same_thread": False}
-)
+engine = create_engine(SQLALCHEMY_DATABASE_URL)
 
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
