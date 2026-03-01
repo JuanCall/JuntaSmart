@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Cobro Diario</title>
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#4CAF50">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="app-header">
+        <h1>💰 Cobro Diario</h1>
+    </header>
+
+    <main class="container">
+        <form id="form-pago" class="card">
+            <div class="form-group">
+                <label for="cliente-select">Seleccionar Cliente:</label>
+                <select id="cliente-select" required>
+                    <option value="" disabled selected>Cargando clientes...</option>
+                </select>
+            </div>
+
+            <div id="contenedor-juntas-cobro">
+                <p style="color: #666; font-size: 0.9rem; text-align: center;">Selecciona un cliente para ver sus cuotas de hoy.</p>
+            </div>
+
+            <button type="submit" class="btn-primary oculto" id="btn-registrar">Registrar Pagos</button>
+        </form>
+
+        <div id="mensaje-estado" class="mensaje oculto"></div>
+
+        <hr class="divider">
+        
+        <div class="acciones-diarias">
+            <h3>⚙️ Fin de la Jornada</h3>
+            <p>Presiona este botón al terminar tu ruta para calcular las deudas y restar las cuotas del día a todos los clientes.</p>
+            <button id="btn-cierre" class="btn-secondary">Ejecutar Cierre de Día</button>
+        </div>
+
+    </main>
+
+    <nav class="bottom-nav">
+        <a href="index.html" class="nav-item active">
+            <span>📝</span>
+            Cobros
+        </a>
+        <a href="cuentas.html" class="nav-item">
+            <span>📊</span>
+            Cuentas
+        </a>
+        <a href="nuevo.html" class="nav-item">
+            <span>➕</span>
+            Nuevo
+        </a>
+    </nav>
+
+    <script src="app.js"></script>
+</body>
+</html>

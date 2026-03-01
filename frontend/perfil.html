@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Perfil del Cliente</title>
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#4CAF50">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="app-header" style="display: flex; align-items: center;">
+        <button onclick="window.history.back()" style="background:none; border:none; color:white; font-size:1.5rem; margin-right:15px;">⬅️</button>
+        <h1 id="nombre-perfil">Cargando...</h1>
+    </header>
+
+    <main class="container">
+        <div class="card" style="text-align: center; margin-bottom: 20px;">
+            <h3 style="color: #666;">Balance Global</h3>
+            <h1 id="balance-perfil" style="font-size: 2.5rem; margin: 10px 0;">S/ 0.00</h1>
+            <p id="estado-perfil" style="font-weight: bold;"></p>
+        </div>
+
+        <h3>📋 Juntas Activas</h3>
+        <div id="lista-juntas-perfil" style="margin-bottom: 20px;">
+            <p>Cargando juntas...</p>
+        </div>
+
+        <div class="form-group" style="margin-top: 30px; background-color: #e3f2fd; padding: 15px; border-radius: 8px;">
+            <label style="color: #1565c0; font-weight: bold;">Ver historial de la junta:</label>
+            <select id="selector-junta-perfil" style="margin-top: 5px;">
+                <option value="" disabled selected>Cargando juntas...</option>
+            </select>
+        </div>
+
+        <h3>📅 Historial de Pagos</h3>
+        <div class="calendario-grid" id="calendario-pagos">
+            </div>
+    </main>
+
+    <script src="app.js"></script>
+</body>
+</html>

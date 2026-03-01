@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Nuevo Cliente</title>
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#4CAF50">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Estilos específicos para la simulación */
+        .simulacion-card {
+            background-color: #e3f2fd; /* Azul clarito */
+            border-left: 5px solid #2196f3;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+        .simulacion-card h4 { color: #1565c0; margin-bottom: 10px; }
+        .dato-resaltado { font-size: 1.3rem; font-weight: bold; color: #0d47a1; }
+        .btn-simular { background-color: #2196f3; margin-bottom: 10px; }
+        .btn-simular:active { background-color: #1976d2; }
+    </style>
+</head>
+<body>
+    <header class="app-header">
+        <h1>👤 Nuevo Cliente</h1>
+    </header>
+
+    <main class="container">
+        <form id="form-nuevo" class="card">
+            
+            <div class="form-group">
+                <label>¿A quién le daremos la junta?</label>
+                <select id="tipo-cliente" style="margin-bottom: 10px; background-color: #e3f2fd;">
+                    <option value="nuevo">Registrar Cliente Nuevo</option>
+                    <option value="existente">Elegir Cliente Existente</option>
+                </select>
+            </div>
+
+            <div class="form-group" id="div-cliente-nuevo">
+                <label>Nombre del Nuevo Cliente:</label>
+                <input type="text" id="nuevo-nombre" placeholder="Ej. María López">
+            </div>
+
+            <div class="form-group oculto" id="div-cliente-existente">
+                <label>Seleccionar Cliente:</label>
+                <select id="select-cliente-existente">
+                    <option value="" disabled selected>Cargando clientes...</option>
+                </select>
+            </div>
+            
+            <hr class="divider">
+            <h3 style="margin-bottom: 15px; color: #555;">Datos del Trato</h3>
+
+            <div class="form-group">
+                <label>Monto Total de la Junta (S/):</label>
+                <input type="number" id="nuevo-monto" step="0.01" inputmode="decimal" placeholder="Ej. 5000" required>
+            </div>
+            <div class="form-group">
+                <label>Cobro Diario Acordado (S/):</label>
+                <input type="number" id="nueva-cuota" step="0.01" inputmode="decimal" placeholder="Ej. 60" required>
+            </div>
+            
+            <div class="form-group">
+                <label>Número / Turno de Entrega:</label>
+                <select id="nuevo-mes-entrega" required>
+                    <option value="1">Número 1 (Primer Mes)</option>
+                    <option value="2">Número 2 (Segundo Mes)</option>
+                    <option value="3">Número 3 (Tercer Mes)</option>
+                    <option value="4">Número 4 (Cuarto Mes)</option>
+                    <option value="5">Número 5 (Quinto Mes)</option>
+                </select>
+                <small style="color: #666; font-size: 0.85rem; display: block; margin-top: 5px;">
+                    En qué mes tu mamá le entregará el dinero al cliente. Todos pagan por 5 meses.
+                </small>
+            </div>
+            
+            <div class="form-group">
+                <label>Mes de Inicio de la Junta:</label>
+                <select id="nuevo-mes-inicio" required>
+                    </select>
+                <small style="color: #666; font-size: 0.85rem;">Todas las juntas inician el día 1 del mes seleccionado.</small>
+            </div>
+
+            <div id="panel-atraso" class="form-group oculto" style="background-color: #fff3e0; padding: 15px; border-radius: 8px; border-left: 4px solid #ff9800;">
+                <label style="color: #e65100;">⚠️ El cliente entra <span id="span-dias-tarde">0</span> días tarde.</label>
+                <p style="font-size: 0.9rem; margin-bottom: 10px;">¿Cómo arreglarán esos días pasados?</p>
+                
+                <div style="margin-bottom: 8px;">
+                    <input type="radio" id="opcion-descuento" name="opcion_atraso" value="descuento" checked>
+                    <label for="opcion-descuento" style="display:inline; font-weight:normal;">Descontar esos días del pozo que le daré al final.</label>
+                </div>
+                <div>
+                    <input type="radio" id="opcion-aldia" name="opcion_atraso" value="al_dia">
+                    <label for="opcion-aldia" style="display:inline; font-weight:normal;">Sumarle la deuda ahora (deberá ponerse al día).</label>
+                </div>
+            </div>
+
+            <button type="button" id="btn-simular" class="btn-primary btn-simular">Verificar Trato</button>
+
+            <div id="resultado-simulacion" class="simulacion-card oculto">
+                <h4>📊 Resumen del Trato</h4>
+                <p>Fecha de Fin: <strong id="sim-fecha">--/--/----</strong></p>
+                <hr style="margin: 10px 0; border: 0; border-top: 1px dashed #2196f3;">
+                <p style="color: #d32f2f;">🗓️ El <strong><span id="sim-fecha-pago">--/--/----</span></strong> le entregarás:</p>
+                <p style="font-size: 1.8rem; font-weight: bold; color: #1565c0; text-align: center; margin: 10px 0;" id="sim-monto-entregar">S/ 0.00</p>
+                <p style="font-size: 0.85rem; color: #666; text-align: center;" id="sim-alerta"></p>
+            </div>
+
+            <button type="submit" id="btn-guardar-nuevo" class="btn-primary oculto">Confirmar y Guardar</button>
+        </form>
+
+        <div id="mensaje-estado-nuevo" class="mensaje oculto"></div>
+    </main>
+
+    <nav class="bottom-nav">
+        <a href="index.html" class="nav-item"><span>📝</span>Cobros</a>
+        <a href="cuentas.html" class="nav-item"><span>📊</span>Cuentas</a>
+        <a href="nuevo.html" class="nav-item active"><span>➕</span>Nuevo</a>
+    </nav>
+
+    <script src="app.js"></script>
+</body>
+</html>
